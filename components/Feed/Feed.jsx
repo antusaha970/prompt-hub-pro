@@ -30,7 +30,6 @@ const Feed = () => {
     };
     fetchPosts();
   }, []);
-  console.log(post);
 
   return (
     <section className="feed">
