@@ -23,7 +23,6 @@ const EditPrompt = () => {
           prompt: existingPrompt.prompt,
           tag: existingPrompt.tag,
         });
-        console.log(existingPrompt);
       } catch (error) {
         console.error(error);
       }
@@ -33,17 +32,18 @@ const EditPrompt = () => {
     }
   }, [promptId]);
 
-  const createPrompt = async (e) => {
+  const updatePrompt = async (e) => {
     e.preventDefault();
     setSubmitting(true);
-
+    if (!promptId) {
+      return alert("Prompt not found");
+    }
     try {
-      const response = await fetch("/api/prompt/new", {
-        method: "POST",
+      const response = await fetch(`/api/prompt/${promptId}`, {
+        method: "PATCH",
         body: JSON.stringify({
           prompt: post.prompt,
           tag: post.tag,
-          userId: session?.user?.id,
         }),
       });
       if (response.ok) {
@@ -61,7 +61,7 @@ const EditPrompt = () => {
       post={post}
       setPost={setPost}
       submitting={submitting}
-      handleSubmit={createPrompt}
+      handleSubmit={updatePrompt}
     />
   );
 };
