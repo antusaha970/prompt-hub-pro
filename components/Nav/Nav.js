@@ -17,7 +17,7 @@ const Nav = () => {
 
   return (
     <nav className="flex-between w-full mb-16 pt-3">
-      <Link href="/">
+      <Link href="/" className="flex gap-2">
         <Image
           src="/assets/images/logo.svg"
           alt="Promptopia Logo"
@@ -25,7 +25,7 @@ const Nav = () => {
           height={30}
           className="object-contain"
         />
-        <p className="logo_text">Promptopia</p>
+        <p className="logo_text">Prompt Hub</p>
       </Link>
       {/* {Destop navigation} */}
 
