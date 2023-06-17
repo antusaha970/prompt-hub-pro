@@ -50,7 +50,7 @@ const UserProfile = () => {
     <>
       {status === "authenticated" && (
         <Profile
-          name="My profile"
+          name="My "
           desc="Welcome to your profile"
           data={post}
           handleEdit={handleEdit}
