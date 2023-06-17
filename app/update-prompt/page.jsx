@@ -3,10 +3,12 @@
 import { useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Form from "@components/Form/Form";
+import { useSession } from "next-auth/react";
 
 const EditPrompt = () => {
   const [submitting, setSubmitting] = useState(false);
   const router = useRouter();
+  const { status } = useSession();
   const searchParams = useSearchParams();
   const promptId = searchParams.get("id");
   const [post, setPost] = useState({
@@ -31,6 +33,14 @@ const EditPrompt = () => {
       getExistingPrompt();
     }
   }, [promptId]);
+  useEffect(() => {
+    if (status === "unauthenticated") {
+      router.replace("/");
+    }
+  }, [status]);
+  if (status === "loading") {
+    return <p>Loading...</p>;
+  }
 
   const updatePrompt = async (e) => {
     e.preventDefault();

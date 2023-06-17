@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 
 const UserProfile = () => {
   const router = useRouter();
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
   const [post, setPost] = useState([]);
 
   useEffect(() => {
@@ -19,7 +19,14 @@ const UserProfile = () => {
     if (session?.user.id) {
       fetchPosts();
     }
-  }, []);
+    if (status === "unauthenticated") {
+      router.replace("/");
+    }
+  }, [status]);
+  if (status === "loading") {
+    return <p>loading...</p>;
+  }
+
   const handleEdit = (post) => {
     router.push(`/update-prompt?id=${post._id}`);
   };
@@ -41,13 +48,15 @@ const UserProfile = () => {
 
   return (
     <>
-      <Profile
-        name="My profile"
-        desc="Welcome to your profile"
-        data={post}
-        handleEdit={handleEdit}
-        handleDelete={handleDelete}
-      />
+      {status === "authenticated" && (
+        <Profile
+          name="My profile"
+          desc="Welcome to your profile"
+          data={post}
+          handleEdit={handleEdit}
+          handleDelete={handleDelete}
+        />
+      )}
     </>
   );
 };
