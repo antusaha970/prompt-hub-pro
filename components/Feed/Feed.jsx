@@ -1,7 +1,7 @@
 "use client";
 
 import PromptCard from "@components/PromptCard/PromptCard";
-import { useEffect, useState } from "react";
+import { useDeferredValue, useEffect, useState } from "react";
 
 const PromptCardList = ({ data, handleTagClicked }) => {
   return (
@@ -20,6 +20,7 @@ const PromptCardList = ({ data, handleTagClicked }) => {
 const Feed = () => {
   const [searchText, setSearchText] = useState("");
   const [post, setPost] = useState([]);
+  const query = useDeferredValue(searchText);
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -30,9 +31,29 @@ const Feed = () => {
     fetchPosts();
   }, []);
 
-  const handleSearchChange = async (e) => {};
+  useEffect(() => {
+    const fetchPostsByQuery = async () => {
+      try {
+        const response = await fetch(`/api/prompt/query?searchText=${query}`);
+        const data = await response.json();
+        setPost(data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
 
-  const handleShowContentWithTag = async (tag) => {};
+    if (query) {
+      fetchPostsByQuery();
+    }
+  }, [query]);
+
+  const handleSearchChange = async (e) => {
+    setSearchText(e.target.value);
+  };
+
+  const handleShowContentWithTag = async (tag) => {
+    setSearchText(tag);
+  };
 
   return (
     <section className="feed">
