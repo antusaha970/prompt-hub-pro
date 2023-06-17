@@ -1,7 +1,7 @@
 import Prompt from "@models/prompt";
 import { connectToDB } from "@utils/database";
-
-export const GET = async (req, { params }) => {
+export const dynamic = "force-dynamic";
+export const GET = async (req) => {
   try {
     await connectToDB;
     const params = req.nextUrl.searchParams;
@@ -12,10 +12,9 @@ export const GET = async (req, { params }) => {
         { prompt: { $regex: searchText } },
       ],
     }).populate("creator");
-
     return new Response(JSON.stringify(prompts), { status: 200 });
   } catch (error) {
-    console.log(error);
+    console.log({ error });
     return new Response("Failed to retrieve prompt", error, { status: 500 });
   }
 };
