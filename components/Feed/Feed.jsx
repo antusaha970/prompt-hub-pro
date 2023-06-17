@@ -20,7 +20,6 @@ const PromptCardList = ({ data, handleTagClicked }) => {
 const Feed = () => {
   const [searchText, setSearchText] = useState("");
   const [post, setPost] = useState([]);
-  const handleSearchChange = async (e) => {};
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -30,6 +29,10 @@ const Feed = () => {
     };
     fetchPosts();
   }, []);
+
+  const handleSearchChange = async (e) => {};
+
+  const handleShowContentWithTag = async (tag) => {};
 
   return (
     <section className="feed">
@@ -43,7 +46,10 @@ const Feed = () => {
           className="search_input peer"
         />
       </form>
-      <PromptCardList data={post} handleTagClicked={() => {}} />
+      <PromptCardList
+        data={post}
+        handleTagClicked={(tag) => handleShowContentWithTag(tag)}
+      />
     </section>
   );
 };
