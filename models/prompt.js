@@ -18,7 +18,7 @@ const UserSchema = new Schema({
     type: String,
   },
 });
-mongoose.model("User", UserSchema);
+const User = mongoose.model("User", UserSchema);
 const PromptSchema = new Schema({
   creator: {
     type: Schema.Types.ObjectId,
