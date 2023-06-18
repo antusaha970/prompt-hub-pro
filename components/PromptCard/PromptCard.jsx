@@ -81,6 +81,11 @@ const PromptCard = ({ post, handleTagClicked, handleEdit, handleDelete }) => {
           </p>
         </div>
       )}
+      <Link href={`/chat-bot?prompt=${post.prompt}`}>
+        <p className="font-inter text-sm orange_gradient cursor-pointer mt-4 text-center">
+          Show Chatbot ans
+        </p>
+      </Link>
     </div>
   );
 };
