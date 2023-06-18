@@ -62,7 +62,7 @@ const PromptCard = ({ post, handleTagClicked, handleEdit, handleDelete }) => {
           handleTagClicked && handleTagClicked(post.tag);
         }}
       >
-        {post.tag}
+        #{post.tag}
       </p>
 
       {session?.user?.id === post.creator._id && pathName === "/profile" && (
