@@ -5,9 +5,6 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
-export const metadata = {
-  title: "Your Profile",
-};
 const UserProfile = () => {
   const router = useRouter();
   const { data: session, status } = useSession();
