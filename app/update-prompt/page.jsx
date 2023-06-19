@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Form from "@components/Form/Form";
 import { useSession } from "next-auth/react";
+import { toast } from "react-toastify";
 
 const EditPrompt = () => {
   const [submitting, setSubmitting] = useState(false);
@@ -58,9 +59,29 @@ const EditPrompt = () => {
       });
       if (response.ok) {
         router.push("/");
+        toast.success("Prompt Edited successfully", {
+          position: "top-left",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
       }
     } catch (error) {
       console.log({ error });
+      toast.error(`Can't edit the prompt at this moment`, {
+        position: "top-left",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
     } finally {
       setSubmitting(false);
     }

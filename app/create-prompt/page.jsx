@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Form from "@components/Form/Form";
+import { toast } from "react-toastify";
 
 const CreatePrompt = () => {
   const [submitting, setSubmitting] = useState(false);
@@ -38,9 +39,29 @@ const CreatePrompt = () => {
       });
       if (response.ok) {
         router.push("/");
+        toast.success("Prompt added successfully", {
+          position: "top-left",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
       }
     } catch (error) {
       console.log({ error });
+      toast.error("Error while adding prompt", {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
     } finally {
       setSubmitting(false);
     }

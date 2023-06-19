@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
+import { toast } from "react-toastify";
 
 const PromptCard = ({ post, handleTagClicked, handleEdit, handleDelete }) => {
   const [copied, setCopied] = useState("");
@@ -14,6 +15,16 @@ const PromptCard = ({ post, handleTagClicked, handleEdit, handleDelete }) => {
     setCopied(post.prompt);
     navigator.clipboard.writeText(post.prompt);
     setTimeout(() => setCopied(""), 3000);
+    toast.success("Copied Successfully", {
+      position: "top-left",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
   };
   return (
     <div className="prompt_card">
