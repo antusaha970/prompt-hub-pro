@@ -5,11 +5,10 @@ const Home = () => {
   return (
     <section className="w-full flex-center flex-col">
       <h1 className="head_text text-center">
-        Explore and distribute diverse content for discovery and sharing
-        purposes
+        Explore Prompt created by People around the world
         <br className="max-md:hidden" />
         <span className="orange_gradient text-center">
-          Prompts enhanced by the power of artificial intelligence.
+          See Prompt and also a sample ans for that prompt
         </span>
       </h1>
       <p className="text-center desc">
