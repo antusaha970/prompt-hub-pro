@@ -1,5 +1,5 @@
 const Footer = () => {
-  return <div>All rights reversed by Prompt Hub</div>;
+  return <div className="py-5">All rights reversed by Prompt Hub</div>;
 };
 
 export default Footer;
